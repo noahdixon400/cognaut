@@ -1,0 +1,12 @@
+   # Everything the site remembers lives in data/ -- every user, record and
+   # uploaded file, private ones included. It must never be uploaded.
+   data/
+   *.db
+   *.db-journal
+
+   # Python and system clutter
+   __pycache__/
+   *.pyc
+   .DS_Store
+   Thumbs.db
+   desktop.ini
