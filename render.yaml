@@ -1,0 +1,27 @@
+# How Render runs Cognaut. Render reads this file from the GitHub repository
+# when you choose New > Blueprint, so there is nothing to type by hand
+# except the two settings it asks you for (OPERATOR, OPERATOR_PASSWORD).
+services:
+  - type: web
+    name: cognaut
+    runtime: python
+    plan: "0.5c-512mb"       # $7/month: 0.5 CPU, 512 MB (formerly "starter"). The free plan
+                             # cannot keep a disk, so it would lose everything
+    buildCommand: "true"     # nothing to build: standard library only
+    startCommand: python code.py
+    healthCheckPath: /api/version
+    disk:
+      name: cognaut-data
+      mountPath: /var/data
+      sizeGB: 1              # grow it later in the dashboard if you need to
+    envVars:
+      - key: DATA_DIR
+        value: /var/data
+      - key: PUBLIC_SITE
+        value: "1"
+      - key: BANDWIDTH_GB      # monthly traffic ceiling; past it the site pauses until the 1st
+        value: "20"            # 20 GB = 5 included + 15 at $0.15 = at most about $2.25 extra
+      - key: OPERATOR        # your name, exactly as you will sign in with it
+        sync: false
+      - key: OPERATOR_PASSWORD   # your first password, 8 characters or more
+        sync: false

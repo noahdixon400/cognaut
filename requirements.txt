@@ -1,0 +1,2 @@
+# Cognaut needs nothing beyond the Python standard library.
+# This file exists so hosting services recognise it as a Python program.
